@@ -14,9 +14,9 @@ import (
 func init() {
 	// Add $GOROOT and $GOROOT_FINAL to the filtered paths.
 	goroot := runtime.GOROOT()
-	filtered[goroot] = struct{}{}
+	filtered[filepath.Join(goroot, "src")] = struct{}{}
 	if err := os.Setenv("GOROOT", ""); err == nil {
-		filtered[runtime.GOROOT()] = struct{}{} // $GOROOT_FINAL
+		filtered[filepath.Join(runtime.GOROOT(), "src")] = struct{}{} // $GOROOT_FINAL
 		os.Setenv("GOROOT", goroot)
 	}
 	// Make the order of file factory methods platform-specific.
